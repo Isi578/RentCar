@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewController.InicioViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="500.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.InicioViewController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <TabPane fx:id="tabPane" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <tabs>
+                        <Tab text="Configuración">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="504.0" prefWidth="762.0">
+                                    <children>
+                                        <SplitPane layoutY="7.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="762.0">
+                                            <items>
+                                                <fx:include fx:id="configuracion" source="configuracion.fxml" />
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Clientes">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="504.0" prefWidth="762.0">
+                                    <children>
+                                        <SplitPane layoutY="7.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="762.0">
+                                            <items>
+                                                <fx:include fx:id="cliente" source="cliente.fxml" />
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Vehiculos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="504.0" prefWidth="762.0">
+                                    <children>
+                                        <SplitPane layoutY="7.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="762.0">
+                                            <items>
+                                                <fx:include fx:id="vehiculo" source="vehiculo.fxml" />
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Reservas">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="504.0" prefWidth="762.0">
+                                    <children>
+                                        <SplitPane layoutY="7.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="762.0">
+                                            <items>
+                                                <fx:include fx:id="reserva" source="reserva.fxml" />
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Modalidades">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="504.0" prefWidth="762.0">
+                                    <children>
+                                        <SplitPane layoutY="7.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="762.0">
+                                            <items>
+                                                <fx:include fx:id="modalidad" source="modalidad.fxml" />
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </TabPane>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
