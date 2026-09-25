@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Reserva {
     private String codigo;
@@ -8,13 +9,18 @@ public class Reserva {
     private LocalDate fechaIngreso;
     private LocalDate fechaFin;
     private double descuento;
+    private List<ServicioAdicional> serviciosAdicionales;
+    private Vehiculo vehiculo;
+    private Cliente cliente;
 
-public Reserva (String codigo, LocalDate fechaReserva, LocalDate fechaIngreso, LocalDate fechaFin, double descuento) {
+
+public Reserva (String codigo, LocalDate fechaReserva, LocalDate fechaIngreso, LocalDate fechaFin, double descuento, List<ServicioAdicional> serviciosAdicionales) {
     this.codigo = codigo;
     this.fechaReserva = fechaReserva;
     this.fechaIngreso = fechaIngreso;
     this.fechaFin = fechaFin;
     this.descuento = descuento;
+    this.serviciosAdicionales = serviciosAdicionales;
 }
 
 public String getCodigo() {

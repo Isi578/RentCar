@@ -6,13 +6,15 @@ public class ServicioAdicional {
     private String descripcion;
     private double precio;
     private boolean disponibilidad;
+    private Reserva reserva;
 
-public ServicioAdicional(String codigo, String nombre, String descripcion, double precio, boolean disponibilidad) {
+public ServicioAdicional(String codigo, String nombre, String descripcion, double precio, boolean disponibilidad,  Reserva reserva) {
     this.codigo = codigo;
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.precio = precio;
     this.disponibilidad = disponibilidad;
+    this.reserva = reserva;
 }
 
 public String getCodigo() {

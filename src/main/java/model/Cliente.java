@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Cliente {
     private String nombreCompleto;
@@ -9,6 +10,8 @@ public class Cliente {
     private String correo;
     private int edad;
     private LocalDate fechaRegistro;
+    private List<Reserva> reservas;
+    
 
 public Cliente(String nombreCompleto, String documento, String telefono, String correo) {
     this.nombreCompleto = nombreCompleto;
@@ -60,5 +63,6 @@ public LocalDate getFechaRegistro() {
 public void setFechaRegistro(LocalDate fechaRegistro) {
     this.fechaRegistro = fechaRegistro;
 }
+
 
 }

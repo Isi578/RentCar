@@ -1,11 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class Vehiculo {
     private String placa;
     private String marca;
     private String modelo;
     private int anio;
     private double tarifaDiaria;
+    private List<Reserva> reservas;
 
 public Vehiculo(String placa, String marca, String modelo, int anio, double tarifaDiaria) {
     this.placa = placa;

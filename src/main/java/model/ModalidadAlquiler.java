@@ -9,6 +9,7 @@ public class ModalidadAlquiler {
     private EstadoModalidad estadoModalidad;
     private String beneficiario;
 
+
 public ModalidadAlquiler(String codigo, String nombre, String descripcion, int duracionMinimaDias, double valorDiario,EstadoModalidad estadoModalidad, String beneficiario) {
     this.codigo = codigo;
     this.nombre = nombre;
