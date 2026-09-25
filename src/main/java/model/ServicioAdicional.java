@@ -1,55 +1,64 @@
 package model;
 
 public class ServicioAdicional {
+
     private String codigo;
     private String nombre;
     private String descripcion;
     private double precio;
-    private boolean disponibilidad;
-    private Reserva reserva;
+    private boolean disponible;
 
-public ServicioAdicional(String codigo, String nombre, String descripcion, double precio, boolean disponibilidad,  Reserva reserva) {
-    this.codigo = codigo;
-    this.nombre = nombre;
-    this.descripcion = descripcion;
-    this.precio = precio;
-    this.disponibilidad = disponibilidad;
-    this.reserva = reserva;
-}
+    public ServicioAdicional(
+            String codigo,
+            String nombre,
+            String descripcion,
+            double precio,
+            boolean disponible) {
 
-public String getCodigo() {
-    return codigo;
-}
-public void setCodigo(String codigo) {
-    this.codigo = codigo;
-}
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.disponible = disponible;
+    }
 
-public String getNombre() {
-    return nombre;
-}
-public void setNombre(String nombre) {
-    this.nombre = nombre;
-}
+    public String getCodigo() {
+        return codigo;
+    }
 
-public String getDescripcion() {
-    return descripcion;
-}
-public void setDescripcion(String descripcion) {
-    this.descripcion = descripcion;
-}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-public double getPrecio() {
-    return precio;
-}
-public void setPrecio(double precio) {
-    this.precio = precio;
-}
+    public String getNombre() {
+        return nombre;
+    }
 
-public boolean isDisponibilidad() {
-    return disponibilidad;
-}
-public void setDisponibilidad(boolean disponibilidad) {
-    this.disponibilidad = disponibilidad;
-}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public boolean estaDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 }
