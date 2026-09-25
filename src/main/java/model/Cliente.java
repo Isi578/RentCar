@@ -1,68 +1,89 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Cliente {
+
     private String nombreCompleto;
     private String documento;
     private String telefono;
     private String correo;
     private int edad;
     private LocalDate fechaRegistro;
-    private List<Reserva> reservas;
-    
 
-public Cliente(String nombreCompleto, String documento, String telefono, String correo) {
-    this.nombreCompleto = nombreCompleto;
-    this.documento = documento;
-    this.telefono = telefono;
-    this.correo = correo;
-    this.edad = 0;
-    this.fechaRegistro = LocalDate.now();
-}
+    public Cliente(
+            String nombreCompleto,
+            String documento,
+            String telefono,
+            String correo,
+            int edad,
+            LocalDate fechaRegistro) {
 
-public String getNombreCompleto() {
-    return nombreCompleto;
-}
-public void setNombreCompleto(String nombreCompleto) {
-    this.nombreCompleto = nombreCompleto;
-}
+        this.nombreCompleto = nombreCompleto;
+        this.documento = documento;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.edad = edad;
+        this.fechaRegistro = fechaRegistro;
+    }
 
-public String getDocumento() {
-    return documento;
-}
-public void setDocumento(String documento) {
-    this.documento = documento;
-}
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
 
-public String getTelefono() {
-    return telefono;
-}
-public void setTelefono(String telefono) {
-    this.telefono = telefono;
-}
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
 
-public String getCorreo() {
-    return correo;
-}
-public void setCorreo(String correo) {
-    this.correo = correo;
-}
+    public String getDocumento() {
+        return documento;
+    }
 
-public int getEdad() {
-    return edad;
-}
-public void setEdad(int edad) {
-    this.edad = edad;
-}
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
 
-public LocalDate getFechaRegistro() {
-    return fechaRegistro;
-}
-public void setFechaRegistro(LocalDate fechaRegistro) {
-    this.fechaRegistro = fechaRegistro;
-}
+    public String getTelefono() {
+        return telefono;
+    }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombreCompleto='" + nombreCompleto + '\'' +
+                ", documento='" + documento + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", correo='" + correo + '\'' +
+                ", edad=" + edad +
+                ", fechaRegistro=" + fechaRegistro +
+                '}';
+    }
 }
