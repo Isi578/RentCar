@@ -22,7 +22,7 @@
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
                 <Label style="-fx-font-weight: bold; -fx-text-fill: #334155;" text="Buscar por placa" />
-                <TextField fx:id="buscarPlacaField" onAction="#buscarVehiculo" promptText="Placa del vehículo" HBox.hgrow="ALWAYS" />
+                <TextField fx:id="buscarPlacaField" onAction="#buscarVehiculo" HBox.hgrow="ALWAYS" />
                 <Button onAction="#buscarVehiculo" text="Buscar" />
                 <Button onAction="#mostrarVehiculos" text="Mostrar todos">
                <font>
@@ -40,19 +40,19 @@
             </columnConstraints>
             <children>
                 <Label text="Placa" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="placaField" promptText="Placa" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="placaField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label text="Marca" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <TextField fx:id="marcaField" promptText="Marca" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <TextField fx:id="marcaField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
                 <Label text="Modelo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="modeloField" promptText="Modelo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="modeloField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label text="Año" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <TextField fx:id="anioField" promptText="Año" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <TextField fx:id="anioField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
                 <Label text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="tipoField" promptText="Tipo de vehículo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="tipoField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label text="Tarifa diaria" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                <TextField fx:id="tarifaDiariaField" promptText="Tarifa diaria" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <TextField fx:id="tarifaDiariaField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             </children>
          <rowConstraints>
             <RowConstraints />

@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewController.ConfiguracionViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="16.0" style="-fx-background-color: #f5f7fa; -fx-font-family: Arial;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.ConfiguracionViewController">
+    <padding>
+        <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+    </padding>
+    <children>
+        <VBox spacing="4.0">
+            <children>
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #183153;" text="Configuración de la empresa" />
+            </children>
+        </VBox>
 
-</AnchorPane>
+        <GridPane hgap="14.0" vgap="12.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label text="Nombre comercial" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nombreComercialField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="NIT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="nitField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Dirección" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="direccionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="telefonoField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Correo electrónico" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="correoField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Página web" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="paginaWebField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER_LEFT" spacing="12.0">
+            <children>
+                <Button onAction="#guardarConfiguracion" text="Guardar configuración" />
+                <Label fx:id="mensajeLabel" style="-fx-text-fill: #475569;" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
