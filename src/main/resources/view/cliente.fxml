@@ -22,7 +22,8 @@
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
                 <Label style="-fx-font-weight: bold; -fx-text-fill: #334155;" text="Buscar" />
-                <TextField fx:id="buscarField" HBox.hgrow="ALWAYS" />
+                <TextField fx:id="buscarField" onAction="#buscarCliente" HBox.hgrow="ALWAYS" />
+                <Button onAction="#buscarCliente" text="Buscar" />
             </children>
         </HBox>
 

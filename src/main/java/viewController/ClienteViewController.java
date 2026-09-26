@@ -56,19 +56,34 @@ public class ClienteViewController {
 
     private final ObservableList<Cliente> clientes =
             DatosCompartidos.getInstancia().getClientes();
+    private FilteredList<Cliente> clientesFiltrados;
     private Cliente clienteEnEdicion;
 
     @FXML
     private void initialize() {
         configurarColumnas();
 
-        FilteredList<Cliente> clientesFiltrados = new FilteredList<>(clientes, cliente -> true);
-        buscarField.textProperty().addListener((observable, anterior, texto) ->
-                clientesFiltrados.setPredicate(cliente -> coincideConBusqueda(cliente, texto)));
+        clientesFiltrados = new FilteredList<>(clientes, cliente -> true);
         clientesTable.setItems(clientesFiltrados);
 
         clientesTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, anterior, seleccionado) -> actualizarBotonesSeleccion(seleccionado));
+    }
+
+    @FXML
+    private void buscarCliente() {
+        String texto = buscarField.getText();
+        if (texto == null || texto.isBlank()) {
+            mostrarMensaje("Escribe un nombre, documento, teléfono o correo para buscar.", true);
+            return;
+        }
+
+        clientesFiltrados.setPredicate(cliente -> coincideConBusqueda(cliente, texto));
+        if (clientesFiltrados.isEmpty()) {
+            mostrarMensaje("No se encontraron clientes con ese criterio.", true);
+        } else {
+            mostrarMensaje("Clientes encontrados: " + clientesFiltrados.size(), false);
+        }
     }
 
     private void configurarColumnas() {
