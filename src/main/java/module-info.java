@@ -12,5 +12,6 @@ module com.example.rentcar {
     requires com.almasb.fxgl.all;
 
     opens com.example.rentcar to javafx.fxml;
+    opens viewController to javafx.fxml;
     exports com.example.rentcar;
 }

@@ -1,14 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewController.ClienteViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="12.0" style="-fx-background-color: #f5f7fa; -fx-font-family: Arial;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.ClienteViewController">
+    <padding>
+        <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+    </padding>
+    <children>
+        <VBox spacing="3.0">
+            <children>
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #183153;" text="Gestión de clientes">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
+                <Label style="-fx-font-size: 12px; -fx-text-fill: #64748b;" text="Registra y administra la información de tus clientes.">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
+            </children>
+        </VBox>
 
-</AnchorPane>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #334155;" text="Buscar" />
+                <TextField fx:id="buscarField" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+
+        <GridPane hgap="12.0" vgap="8.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="75.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints minWidth="75.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label text="Nombre completo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nombreField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Documento" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="documentoField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                <Label text="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="telefonoField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Correo" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="correoField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label text="Edad" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="edadField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="593.0" spacing="8.0">
+            <children>
+                <Button fx:id="guardarButton" onAction="#guardarCliente" prefHeight="23.0" prefWidth="188.0" text="Registrar cliente">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+                <Button fx:id="editarButton" disable="true" onAction="#editarCliente" prefHeight="23.0" prefWidth="157.0" text="Editar seleccionado" />
+                <Button fx:id="eliminarButton" disable="true" onAction="#eliminarCliente" prefHeight="23.0" prefWidth="160.0" text="Eliminar seleccionado">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+                <Button fx:id="cancelarButton" disable="true" onAction="#cancelarEdicion" prefHeight="23.0" prefWidth="166.0" text="Cancelar edición" />
+                <Label fx:id="mensajeLabel" style="-fx-text-fill: #475569;" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="clientesTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="nombreColumn" prefWidth="160.0" text="Nombre" />
+                <TableColumn fx:id="documentoColumn" prefWidth="105.0" text="Documento" />
+                <TableColumn fx:id="telefonoColumn" prefWidth="105.0" text="Teléfono" />
+                <TableColumn fx:id="correoColumn" prefWidth="123.99996948242188" text="Correo" />
+                <TableColumn fx:id="edadColumn" prefWidth="91.199951171875" text="Edad" />
+                <TableColumn fx:id="fechaColumn" prefWidth="115.0" text="Fecha de registro" />
+            </columns>
+            <placeholder>
+                <Label text="No hay clientes que coincidan con la búsqueda." />
+            </placeholder>
+        </TableView>
+    </children>
+</VBox>
