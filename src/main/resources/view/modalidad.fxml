@@ -38,8 +38,28 @@
                 <TextField fx:id="descripcionField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="Beneficios" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 <TextField fx:id="beneficiosField" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+                <Label fx:id="coberturaLabel" text="Tipo de cobertura" visible="false" managed="false"
+                       GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="coberturaField" promptText="Tipo de cobertura"
+                           visible="false" managed="false"
+                           GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label fx:id="conductoresLabel" text="Conductores adicionales" visible="false" managed="false"
+                       GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <TextField fx:id="conductoresField" promptText="Cantidad"
+                           visible="false" managed="false"
+                           GridPane.columnIndex="3" GridPane.rowIndex="4" />
+
+                <Label fx:id="caracteristicasLabel" text="Características especiales"
+                       visible="false" managed="false"
+                       GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="caracteristicasField" promptText="Características especiales"
+                           visible="false" managed="false"
+                           GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
             </children>
          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
@@ -65,6 +85,9 @@
                 <TableColumn fx:id="estadoColumn" prefWidth="100.0" text="Estado" />
                 <TableColumn fx:id="precioColumn" prefWidth="110.0" text="Precio diario" />
                 <TableColumn fx:id="duracionColumn" prefWidth="90.0" text="Mín. días" />
+                <TableColumn fx:id="coberturaColumn" prefWidth="120.0" text="Cobertura" />
+                <TableColumn fx:id="conductoresColumn" prefWidth="115.0" text="Conductores extra" />
+                <TableColumn fx:id="caracteristicasColumn" prefWidth="180.0" text="Características especiales" />
             </columns>
             <placeholder>
                 <Label text="No hay modalidades registradas." />

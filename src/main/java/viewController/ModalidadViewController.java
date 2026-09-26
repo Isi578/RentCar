@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import model.EstadoModalidad;
 import model.ModalidadAlquiler;
+import model.Premium;
 import service.ModalidadService;
 
 import java.util.Locale;
@@ -35,6 +36,18 @@ public class ModalidadViewController {
     private TextField descripcionField;
     @FXML
     private TextField beneficiosField;
+    @FXML
+    private Label coberturaLabel;
+    @FXML
+    private TextField coberturaField;
+    @FXML
+    private Label conductoresLabel;
+    @FXML
+    private TextField conductoresField;
+    @FXML
+    private Label caracteristicasLabel;
+    @FXML
+    private TextField caracteristicasField;
     @FXML
     private Label mensajeLabel;
     @FXML
@@ -59,6 +72,12 @@ public class ModalidadViewController {
     private TableColumn<ModalidadAlquiler, String> precioColumn;
     @FXML
     private TableColumn<ModalidadAlquiler, String> duracionColumn;
+    @FXML
+    private TableColumn<ModalidadAlquiler, String> coberturaColumn;
+    @FXML
+    private TableColumn<ModalidadAlquiler, String> conductoresColumn;
+    @FXML
+    private TableColumn<ModalidadAlquiler, String> caracteristicasColumn;
 
     private final ModalidadService modalidadService =
             DatosCompartidos.getInstancia().getModalidadService();
@@ -68,6 +87,9 @@ public class ModalidadViewController {
     private void initialize() {
         tipoCombo.setItems(FXCollections.observableArrayList(
                 "ECONOMICA", "EJECUTIVA", "PREMIUM"));
+        tipoCombo.valueProperty().addListener(
+                (observable, anterior, tipo) -> actualizarCamposPremium(tipo));
+        actualizarCamposPremium(tipoCombo.getValue());
         estadoCombo.setItems(FXCollections.observableArrayList(EstadoModalidad.values()));
         estadoCombo.setValue(EstadoModalidad.DISPONIBLE);
 
@@ -85,6 +107,15 @@ public class ModalidadViewController {
         duracionColumn.setCellValueFactory(celda ->
                 new ReadOnlyStringWrapper(Integer.toString(
                         celda.getValue().getDuracionMinimaDias())));
+        coberturaColumn.setCellValueFactory(celda ->
+                new ReadOnlyStringWrapper(celda.getValue() instanceof Premium premium
+                        ? premium.getTipoCobertura() : ""));
+        conductoresColumn.setCellValueFactory(celda ->
+                new ReadOnlyStringWrapper(celda.getValue() instanceof Premium premium
+                        ? Integer.toString(premium.getConductoresAdicionalesPermitidos()) : ""));
+        caracteristicasColumn.setCellValueFactory(celda ->
+                new ReadOnlyStringWrapper(celda.getValue() instanceof Premium premium
+                        ? premium.getCaracteristicasEspeciales() : ""));
         modalidadesTable.setItems(DatosCompartidos.getInstancia().getModalidades());
         modalidadesTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, anterior, seleccionada) -> {
@@ -103,6 +134,9 @@ public class ModalidadViewController {
         String duracionTexto = duracionMinimaField.getText().trim();
         String descripcion = descripcionField.getText().trim();
         String beneficios = beneficiosField.getText().trim();
+        String cobertura = coberturaField.getText().trim();
+        String conductoresTexto = conductoresField.getText().trim();
+        String caracteristicas = caracteristicasField.getText().trim();
 
         if (codigo.isEmpty() || nombre.isEmpty() || tipo == null
                 || precioTexto.isEmpty() || duracionTexto.isEmpty()
@@ -126,6 +160,24 @@ public class ModalidadViewController {
             return;
         }
 
+        int conductoresAdicionales = 0;
+        if ("PREMIUM".equals(tipo)) {
+            if (cobertura.isEmpty() || conductoresTexto.isEmpty() || caracteristicas.isEmpty()) {
+                mostrarMensaje("Completa los atributos adicionales de Premium.", true);
+                return;
+            }
+            try {
+                conductoresAdicionales = Integer.parseInt(conductoresTexto);
+            } catch (NumberFormatException excepcion) {
+                mostrarMensaje("Los conductores adicionales deben ser un número entero.", true);
+                return;
+            }
+            if (conductoresAdicionales < 0) {
+                mostrarMensaje("Los conductores adicionales no pueden ser negativos.", true);
+                return;
+            }
+        }
+
         if (modalidadEnEdicion != null) {
             modalidadEnEdicion.setNombre(nombre);
             modalidadEnEdicion.setDescripcion(descripcion);
@@ -133,6 +185,11 @@ public class ModalidadViewController {
             modalidadEnEdicion.setPrecioDiario(precio);
             modalidadEnEdicion.setEstadoModalidad(estadoCombo.getValue());
             modalidadEnEdicion.setBeneficios(beneficios);
+            if (modalidadEnEdicion instanceof Premium premium) {
+                premium.setTipoCobertura(cobertura);
+                premium.setConductoresAdicionalesPermitidos(conductoresAdicionales);
+                premium.setCaracteristicasEspeciales(caracteristicas);
+            }
             modalidadesTable.refresh();
             cancelarEdicion();
             mostrarMensaje("Modalidad actualizada correctamente.", false);
@@ -148,7 +205,10 @@ public class ModalidadViewController {
                     duracionMinima,
                     precio,
                     estadoCombo.getValue(),
-                    beneficios);
+                    beneficios,
+                    cobertura,
+                    conductoresAdicionales,
+                    caracteristicas);
             modalidadService.registrarModalidad(modalidad);
             limpiarFormulario();
             mostrarMensaje("Modalidad registrada correctamente.", false);
@@ -178,6 +238,12 @@ public class ModalidadViewController {
                 Integer.toString(seleccionada.getDuracionMinimaDias()));
         descripcionField.setText(seleccionada.getDescripcion());
         beneficiosField.setText(seleccionada.getBeneficios());
+        if (seleccionada instanceof Premium premium) {
+            coberturaField.setText(premium.getTipoCobertura());
+            conductoresField.setText(
+                    Integer.toString(premium.getConductoresAdicionalesPermitidos()));
+            caracteristicasField.setText(premium.getCaracteristicasEspeciales());
+        }
         guardarButton.setText("Guardar cambios");
         cancelarButton.setDisable(false);
         editarButton.setDisable(true);
@@ -237,6 +303,26 @@ public class ModalidadViewController {
         duracionMinimaField.clear();
         descripcionField.clear();
         beneficiosField.clear();
+        coberturaField.clear();
+        conductoresField.clear();
+        caracteristicasField.clear();
+        actualizarCamposPremium(tipoCombo.getValue());
+    }
+
+    private void actualizarCamposPremium(String tipo) {
+        boolean premium = "PREMIUM".equals(tipo);
+        coberturaLabel.setVisible(premium);
+        coberturaLabel.setManaged(premium);
+        coberturaField.setVisible(premium);
+        coberturaField.setManaged(premium);
+        conductoresLabel.setVisible(premium);
+        conductoresLabel.setManaged(premium);
+        conductoresField.setVisible(premium);
+        conductoresField.setManaged(premium);
+        caracteristicasLabel.setVisible(premium);
+        caracteristicasLabel.setManaged(premium);
+        caracteristicasField.setVisible(premium);
+        caracteristicasField.setManaged(premium);
     }
 
     private void mostrarMensaje(String mensaje, boolean esError) {

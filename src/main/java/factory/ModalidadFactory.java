@@ -17,6 +17,32 @@ public class ModalidadFactory {
             double precioDiario,
             EstadoModalidad estadoModalidad,
             String beneficios) {
+        return crear(
+                tipo,
+                codigo,
+                nombre,
+                descripcion,
+                duracionMinimaDias,
+                precioDiario,
+                estadoModalidad,
+                beneficios,
+                "Cobertura completa",
+                0,
+                "Servicio premium");
+    }
+
+    public static ModalidadAlquiler crear(
+            String tipo,
+            String codigo,
+            String nombre,
+            String descripcion,
+            int duracionMinimaDias,
+            double precioDiario,
+            EstadoModalidad estadoModalidad,
+            String beneficios,
+            String tipoCobertura,
+            int conductoresAdicionalesPermitidos,
+            String caracteristicasEspeciales) {
 
         if (tipo == null || tipo.isBlank()) {
             throw new IllegalArgumentException(
@@ -57,9 +83,9 @@ public class ModalidadFactory {
                         precioDiario,
                         estadoModalidad,
                         beneficios,
-                        "Cobertura completa",
-                        0,
-                        "Servicio premium"
+                        tipoCobertura,
+                        conductoresAdicionalesPermitidos,
+                        caracteristicasEspeciales
                 );
 
             default:
