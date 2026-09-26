@@ -49,7 +49,10 @@
 
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
-                <Button onAction="#registrarModalidad" text="Registrar modalidad" />
+                <Button fx:id="guardarButton" onAction="#registrarModalidad" text="Registrar modalidad" />
+                <Button fx:id="editarButton" onAction="#editarModalidad" text="Editar seleccionada" disable="true" />
+                <Button fx:id="eliminarButton" onAction="#eliminarModalidad" text="Eliminar seleccionada" disable="true" />
+                <Button fx:id="cancelarButton" onAction="#cancelarEdicion" text="Cancelar edición" disable="true" />
                 <Label fx:id="mensajeLabel" style="-fx-text-fill: #475569;" />
             </children>
         </HBox>

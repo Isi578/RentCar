@@ -11,9 +11,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import model.Cliente;
+import service.ClienteService;
+import service.NumeroService;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 public class ClienteViewController {
 
@@ -56,6 +57,8 @@ public class ClienteViewController {
 
     private final ObservableList<Cliente> clientes =
             DatosCompartidos.getInstancia().getClientes();
+    private final ClienteService clienteService = new ClienteService();
+    private final NumeroService numeroService = new NumeroService();
     private FilteredList<Cliente> clientesFiltrados;
     private Cliente clienteEnEdicion;
 
@@ -72,18 +75,28 @@ public class ClienteViewController {
 
     @FXML
     private void buscarCliente() {
-        String texto = buscarField.getText();
-        if (texto == null || texto.isBlank()) {
-            mostrarMensaje("Escribe un nombre, documento, teléfono o correo para buscar.", true);
+        String telefono = buscarField.getText();
+        if (telefono == null || telefono.isBlank()) {
+            mostrarMensaje("Escribe el número de teléfono que deseas buscar.", true);
             return;
         }
 
-        clientesFiltrados.setPredicate(cliente -> coincideConBusqueda(cliente, texto));
-        if (clientesFiltrados.isEmpty()) {
-            mostrarMensaje("No se encontraron clientes con ese criterio.", true);
-        } else {
-            mostrarMensaje("Clientes encontrados: " + clientesFiltrados.size(), false);
+        Cliente clienteEncontrado = clienteService.buscarPorTelefono(clientes, telefono);
+        clientesFiltrados.setPredicate(cliente -> cliente == clienteEncontrado);
+        buscarField.clear();
+        if (clienteEncontrado == null) {
+            mostrarMensaje("No se encontró un cliente con ese teléfono.", true);
+            return;
         }
+
+        clientesTable.getSelectionModel().select(clienteEncontrado);
+        boolean telefonoPerfecto =
+                numeroService.esTelefonoNumeroPerfecto(clienteEncontrado.getTelefono());
+        mostrarMensaje(
+                telefonoPerfecto
+                        ? "Cliente encontrado: su teléfono es un número perfecto."
+                        : "Cliente encontrado: su teléfono no es un número perfecto.",
+                !telefonoPerfecto);
     }
 
     private void configurarColumnas() {
@@ -114,6 +127,7 @@ public class ClienteViewController {
             mostrarMensaje("Completa todos los campos.", true);
             return;
         }
+        boolean telefonoPerfecto = numeroService.esTelefonoNumeroPerfecto(telefono);
         if (!correo.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
             mostrarMensaje("Ingresa un correo electrónico válido.", true);
             return;
@@ -142,8 +156,15 @@ public class ClienteViewController {
         if (clienteEnEdicion == null) {
             Cliente nuevoCliente = new Cliente(nombre, documento, telefono, correo, edad, LocalDate.now());
             clientes.add(nuevoCliente);
+            buscarField.clear();
+            clientesFiltrados.setPredicate(cliente -> true);
+            clientesTable.getSelectionModel().select(nuevoCliente);
             limpiarCampos();
-            mostrarMensaje("Cliente registrado correctamente.", false);
+            mostrarMensaje(
+                    telefonoPerfecto
+                            ? "Cliente registrado correctamente."
+                            : "Cliente registrado; el teléfono no es un número perfecto.",
+                    !telefonoPerfecto);
         } else {
             clienteEnEdicion.setNombreCompleto(nombre);
             clienteEnEdicion.setDocumento(documento);
@@ -152,7 +173,11 @@ public class ClienteViewController {
             clienteEnEdicion.setEdad(edad);
             clientesTable.refresh();
             cancelarEdicion();
-            mostrarMensaje("Cambios guardados correctamente.", false);
+            mostrarMensaje(
+                    telefonoPerfecto
+                            ? "Cambios guardados correctamente."
+                            : "Cambios guardados; el teléfono no es un número perfecto.",
+                    !telefonoPerfecto);
         }
     }
 
@@ -220,21 +245,6 @@ public class ClienteViewController {
         boolean haySeleccion = seleccionado != null;
         editarButton.setDisable(!haySeleccion);
         eliminarButton.setDisable(!haySeleccion);
-    }
-
-    private boolean coincideConBusqueda(Cliente cliente, String texto) {
-        if (texto == null || texto.isBlank()) {
-            return true;
-        }
-        String consulta = texto.trim().toLowerCase(Locale.ROOT);
-        return contiene(cliente.getNombreCompleto(), consulta)
-                || contiene(cliente.getDocumento(), consulta)
-                || contiene(cliente.getTelefono(), consulta)
-                || contiene(cliente.getCorreo(), consulta);
-    }
-
-    private boolean contiene(String valor, String consulta) {
-        return valor != null && valor.toLowerCase(Locale.ROOT).contains(consulta);
     }
 
     private void mostrarMensaje(String mensaje, boolean esError) {

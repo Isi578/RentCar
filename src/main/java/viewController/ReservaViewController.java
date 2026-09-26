@@ -16,6 +16,7 @@ import model.EstadoModalidad;
 import model.ModalidadAlquiler;
 import model.Reserva;
 import model.Vehiculo;
+import service.ReporteService;
 import service.ReservaService;
 
 import java.time.LocalDate;
@@ -36,11 +37,17 @@ public class ReservaViewController {
     @FXML
     private DatePicker fechaFinPicker;
     @FXML
+    private DatePicker reporteFechaInicioPicker;
+    @FXML
+    private DatePicker reporteFechaFinPicker;
+    @FXML
     private TextField descuentoField;
     @FXML
     private Label mensajeLabel;
     @FXML
     private Label totalLabel;
+    @FXML
+    private Label ingresosLabel;
     @FXML
     private TableView<Reserva> reservasTable;
     @FXML
@@ -60,6 +67,7 @@ public class ReservaViewController {
 
     private final DatosCompartidos datos = DatosCompartidos.getInstancia();
     private final ReservaService reservaService = datos.getReservaService();
+    private final ReporteService reporteService = new ReporteService();
 
     @FXML
     private void initialize() {
@@ -187,6 +195,26 @@ public class ReservaViewController {
             mensajeLabel.setText("Reserva registrada correctamente.");
             codigoField.setText(generarCodigo());
         } catch (IllegalArgumentException | IllegalStateException excepcion) {
+            mostrarMensaje(excepcion.getMessage(), true);
+        }
+    }
+
+    @FXML
+    private void calcularIngresos() {
+        LocalDate fechaInicio = reporteFechaInicioPicker.getValue();
+        LocalDate fechaFin = reporteFechaFinPicker.getValue();
+
+        if (fechaInicio == null || fechaFin == null) {
+            mostrarMensaje("Selecciona las fechas de inicio y fin del período.", true);
+            return;
+        }
+
+        try {
+            double ingresos = reporteService.calcularIngresosPorPeriodo(
+                    datos.getReservas(), fechaInicio, fechaFin);
+            ingresosLabel.setText("Ingresos: " + formatoMoneda(ingresos));
+            mostrarMensaje("Ingresos calculados para el período seleccionado.", false);
+        } catch (IllegalArgumentException excepcion) {
             mostrarMensaje(excepcion.getMessage(), true);
         }
     }

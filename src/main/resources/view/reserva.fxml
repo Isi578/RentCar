@@ -83,5 +83,16 @@
                 <Label text="No hay reservas registradas." />
             </placeholder>
         </TableView>
+
+        <HBox alignment="CENTER_LEFT" spacing="8.0">
+            <children>
+                <Label text="Ingresos del período" />
+                <DatePicker fx:id="reporteFechaInicioPicker" promptText="Desde" />
+                <DatePicker fx:id="reporteFechaFinPicker" promptText="Hasta" />
+                <Button text="Calcular ingresos" onAction="#calcularIngresos" />
+                <Label fx:id="ingresosLabel" text="Ingresos: --"
+                       style="-fx-font-weight: bold;" />
+            </children>
+        </HBox>
     </children>
 </VBox>
