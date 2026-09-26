@@ -13,6 +13,15 @@ public class VehiculoService {
         this.vehiculos = new ArrayList<>();
     }
 
+    public VehiculoService(List<Vehiculo> vehiculos) {
+        if (vehiculos == null) {
+            throw new IllegalArgumentException(
+                    "La lista de vehículos no puede ser nula."
+            );
+        }
+        this.vehiculos = vehiculos;
+    }
+
     public void registrarVehiculo(Vehiculo vehiculo) {
 
         if (vehiculo == null) {

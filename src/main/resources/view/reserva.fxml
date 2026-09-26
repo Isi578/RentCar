@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewController.ReservaViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="10.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="viewController.ReservaViewController"
+      style="-fx-background-color: #f5f7fa; -fx-font-family: Arial;">
+    <padding>
+        <Insets top="14.0" right="18.0" bottom="14.0" left="18.0" />
+    </padding>
+    <children>
+        <Label text="Registrar reserva"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #183153;" />
 
-</AnchorPane>
+        <GridPane hgap="10.0" vgap="7.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="95.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints minWidth="95.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label text="Código" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="codigoField" editable="false"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                <Label text="Cliente" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+                <ComboBox fx:id="clienteCombo" maxWidth="Infinity"
+                          GridPane.rowIndex="0" GridPane.columnIndex="3" />
+
+                <Label text="Vehículo" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <ComboBox fx:id="vehiculoCombo" maxWidth="Infinity"
+                          GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                <Label text="Modalidad" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+                <ComboBox fx:id="modalidadCombo" maxWidth="Infinity"
+                          GridPane.rowIndex="1" GridPane.columnIndex="3" />
+
+                <Label text="Fecha de ingreso" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <DatePicker fx:id="fechaIngresoPicker" maxWidth="Infinity"
+                            GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                <Label text="Fecha de fin" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+                <DatePicker fx:id="fechaFinPicker" maxWidth="Infinity"
+                            GridPane.rowIndex="2" GridPane.columnIndex="3" />
+
+                <Label text="Descuento ($)" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextField fx:id="descuentoField" text="0"
+                           GridPane.rowIndex="3" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <HBox alignment="CENTER_LEFT" spacing="12.0">
+            <children>
+                <Button text="Registrar reserva" onAction="#registrarReserva" />
+                <Label fx:id="mensajeLabel" style="-fx-text-fill: #475569;" HBox.hgrow="ALWAYS" />
+                <Label fx:id="totalLabel" text="Total: --"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="reservasTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="codigoColumn" text="Código" prefWidth="85.0" />
+                <TableColumn fx:id="clienteColumn" text="Cliente" prefWidth="145.0" />
+                <TableColumn fx:id="vehiculoColumn" text="Vehículo" prefWidth="100.0" />
+                <TableColumn fx:id="modalidadColumn" text="Modalidad" prefWidth="105.0" />
+                <TableColumn fx:id="fechaIngresoColumn" text="Ingreso" prefWidth="95.0" />
+                <TableColumn fx:id="fechaFinColumn" text="Fin" prefWidth="95.0" />
+                <TableColumn fx:id="totalColumn" text="Total" prefWidth="85.0" />
+            </columns>
+            <placeholder>
+                <Label text="No hay reservas registradas." />
+            </placeholder>
+        </TableView>
+    </children>
+</VBox>

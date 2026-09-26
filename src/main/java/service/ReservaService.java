@@ -15,6 +15,15 @@ public class ReservaService {
         this.reservas = new ArrayList<>();
     }
 
+    public ReservaService(List<Reserva> reservas) {
+        if (reservas == null) {
+            throw new IllegalArgumentException(
+                    "La lista de reservas no puede ser nula."
+            );
+        }
+        this.reservas = reservas;
+    }
+
     public void registrarReserva(Reserva reserva) {
 
         if (reserva == null) {

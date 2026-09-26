@@ -13,6 +13,15 @@ public class ModalidadService {
         this.modalidades = new ArrayList<>();
     }
 
+    public ModalidadService(List<ModalidadAlquiler> modalidades) {
+        if (modalidades == null) {
+            throw new IllegalArgumentException(
+                    "La lista de modalidades no puede ser nula."
+            );
+        }
+        this.modalidades = modalidades;
+    }
+
     public void registrarModalidad(
             ModalidadAlquiler modalidad) {
 

@@ -1,7 +1,6 @@
 package viewController;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -55,7 +54,8 @@ public class ClienteViewController {
     @FXML
     private Label mensajeLabel;
 
-    private final ObservableList<Cliente> clientes = FXCollections.observableArrayList();
+    private final ObservableList<Cliente> clientes =
+            DatosCompartidos.getInstancia().getClientes();
     private Cliente clienteEnEdicion;
 
     @FXML

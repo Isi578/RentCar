@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewController.VehiculoViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="12.0" style="-fx-background-color: #f5f7fa; -fx-font-family: Arial;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController.VehiculoViewController">
+    <padding>
+        <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+    </padding>
+    <children>
+        <VBox spacing="3.0">
+            <children>
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #183153;" text="Gestión de vehículos">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
+            </children>
+        </VBox>
 
-</AnchorPane>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #334155;" text="Buscar por placa" />
+                <TextField fx:id="buscarPlacaField" onAction="#buscarVehiculo" promptText="Placa del vehículo" HBox.hgrow="ALWAYS" />
+                <Button onAction="#buscarVehiculo" text="Buscar" />
+                <Button onAction="#mostrarVehiculos" text="Mostrar todos">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Button>
+            </children>
+        </HBox>
+
+        <GridPane hgap="12.0" vgap="8.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="75.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints minWidth="75.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label text="Placa" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="placaField" promptText="Placa" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Marca" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="marcaField" promptText="Marca" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                <Label text="Modelo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="modeloField" promptText="Modelo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Año" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="anioField" promptText="Año" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="tipoField" promptText="Tipo de vehículo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Tarifa diaria" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="tarifaDiariaField" promptText="Tarifa diaria" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="393.0" spacing="8.0">
+            <children>
+                <Button onAction="#registrarVehiculo" prefHeight="23.0" prefWidth="168.0" text="Registrar vehículo" textAlignment="CENTER" />
+                <Label fx:id="mensajeLabel" style="-fx-text-fill: #475569;" HBox.hgrow="ALWAYS" />
+            </children>
+         <padding>
+            <Insets left="230.0" />
+         </padding>
+        </HBox>
+
+        <TableView fx:id="vehiculosTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="placaColumn" prefWidth="100.0" text="Placa" />
+                <TableColumn fx:id="marcaColumn" prefWidth="115.0" text="Marca" />
+                <TableColumn fx:id="modeloColumn" prefWidth="115.0" text="Modelo" />
+                <TableColumn fx:id="anioColumn" prefWidth="75.0" text="Año" />
+                <TableColumn fx:id="tipoColumn" prefWidth="110.0" text="Tipo" />
+                <TableColumn fx:id="tarifaDiariaColumn" prefWidth="120.0000122070312" text="Tarifa diaria" />
+            </columns>
+            <placeholder>
+                <Label text="No hay vehículos para mostrar." />
+            </placeholder>
+        </TableView>
+    </children>
+</VBox>
